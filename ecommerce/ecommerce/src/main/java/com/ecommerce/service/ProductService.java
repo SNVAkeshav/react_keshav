@@ -107,4 +107,62 @@ public class ProductService {
             throw new RuntimeException("Error encrypting product data: " + e.getMessage());
         }
     }
+    // ================= UPDATE PRODUCT =================
+    public Product updateProduct(
+            String productId,
+            String name,
+            String color,
+            String currency,
+            Double price,
+            String description,
+            List<MultipartFile> images
+    ) {
+        try {
+
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
+
+            // 🔹 Update only if value present
+            if (name != null && !name.isBlank()) {
+                product.setName(name);
+            }
+
+            if (color != null) {
+                product.setColor(color);
+            }
+
+            if (currency != null && !currency.isBlank()) {
+                product.setCurrency(currency);
+            }
+
+            if (price != null && price > 0) {
+                product.setPrice(price);
+            }
+
+            if (description != null && !description.isBlank()) {
+                product.setDescription(description);
+            }
+
+            // 🔹 Images update (optional)
+            if (images != null && !images.isEmpty()) {
+                List<String> imageUrls = new ArrayList<>();
+                for (MultipartFile file : images) {
+                    imageUrls.add(cloudinaryService.uploadImage(file));
+                }
+                product.setImages(imageUrls);
+            }
+
+            return productRepository.save(product);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update product: " + e.getMessage());
+        }
+    }
+    // ================= DELETE PRODUCT =================
+    public void deleteProduct(String id){
+        if(!productRepository.existsById(id)){
+            throw new RuntimeException("Product not found by id: " + id);
+        }
+        productRepository.deleteById(id);
+    }
 }

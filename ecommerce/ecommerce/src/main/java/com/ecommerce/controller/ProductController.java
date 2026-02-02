@@ -5,6 +5,7 @@ import com.ecommerce.service.ProductService;
 import com.ecommerce.utils.AESUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,5 +52,27 @@ public class ProductController {
     @GetMapping("/{id}")
     public String productDetailEncrypted(@PathVariable String id) {
         return productService.getEncryptedProductById(id);
+    }
+
+    // ================= UPDATE PRODUCT =================
+    @PutMapping("/update/{id}")
+    public Product updateProduct(
+            @PathVariable String id,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String color,
+            @RequestParam(required = false) String currency,
+            @RequestParam(required = false) Double price,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) List<MultipartFile> images
+    ) {
+        return productService.updateProduct(
+                id, name, color, currency, price, description, images
+        );
+    }
+    // ================= DELETE PRODUCT =================
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String>deleteProduct(@PathVariable String id){
+        productService.deleteProduct(id);
+        return ResponseEntity.ok("Product deleted Successfully!");
     }
 }
