@@ -24,13 +24,14 @@ public class ProductController {
     public Product addProduct(
             @RequestParam String name,
             @RequestParam(required = false) String color,
+            @RequestParam(required = false) String fragnance,
             @RequestParam String currency,
             @RequestParam double price,
             @RequestParam String description,
             @RequestParam List<MultipartFile> images
     ) {
         return productService.addProduct(
-                name, color, currency ,price, description, images
+                name, color, fragnance, currency ,price, description, images
         );
     }
 
@@ -60,13 +61,14 @@ public class ProductController {
             @PathVariable String id,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String color,
+            @RequestParam(required = false) String fragnance,
             @RequestParam(required = false) String currency,
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) List<MultipartFile> images
     ) {
         return productService.updateProduct(
-                id, name, color, currency, price, description, images
+                id, name, color, fragnance, currency, price, description, images
         );
     }
     // ================= DELETE PRODUCT =================

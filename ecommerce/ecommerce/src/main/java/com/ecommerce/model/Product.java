@@ -16,6 +16,7 @@ public class Product {
 
     private String name;        // required
     private String color;       // optional
+    private String fragnance;
     private String currency;
     private double price;       // required
     private String description; // required

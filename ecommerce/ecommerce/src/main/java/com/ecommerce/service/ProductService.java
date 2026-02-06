@@ -24,6 +24,7 @@ public class ProductService {
     public Product addProduct(
             String name,
             String color,
+            String fragnance,
             String currency,
             double price,
             String description,
@@ -56,6 +57,7 @@ public class ProductService {
             Product product = new Product();
             product.setName(name);
             product.setColor(color);
+            product.setFragnance(fragnance);
             product.setCurrency(currency);
             product.setPrice(price);
             product.setDescription(description);
@@ -112,6 +114,7 @@ public class ProductService {
             String productId,
             String name,
             String color,
+            String fragnance,
             String currency,
             Double price,
             String description,
@@ -129,6 +132,9 @@ public class ProductService {
 
             if (color != null) {
                 product.setColor(color);
+            }
+            if (fragnance != null){
+                product.setFragnance(fragnance);
             }
 
             if (currency != null && !currency.isBlank()) {
