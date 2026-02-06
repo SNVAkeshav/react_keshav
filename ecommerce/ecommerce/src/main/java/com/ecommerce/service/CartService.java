@@ -42,7 +42,7 @@ public class CartService {
             item.setProductId(productId);
             item.setProductName(product.getName());
             item.setCurrency(product.getCurrency());
-            item.setPrice(product.getPrice());
+            item.setPrice(product.getPrice()*quantity);
             item.setQuantity(quantity);
             item.setImage(product.getImages().get(0));
 
