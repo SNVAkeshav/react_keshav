@@ -57,13 +57,18 @@ public class BuyNowController {
     @Autowired
     private AddressService addressService;
 
+    //    @PostMapping("/checkout")
+//    public ResponseEntity<?> checkout(@RequestBody CheckoutRequest request) {
+//
+//        // sirf validation ke liye
+//        addressService.getById(request.getAddressId());
+//
+//        return ResponseEntity.ok(buyNowService.createOrder(request));
+//    }
+//}
     @PostMapping("/checkout")
     public ResponseEntity<?> checkout(@RequestBody CheckoutRequest request) {
-
-        // sirf validation ke liye
-        addressService.getById(request.getAddressId());
-
-        return ResponseEntity.ok(buyNowService.createOrder(request));
+        return ResponseEntity.ok(buyNowService.checkout(request));
     }
 }
 
